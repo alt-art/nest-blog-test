@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  backend:
+  server:
     build: .
     ports:
       - "3000:3000"
@@ -19,8 +19,8 @@ services:
     ports:
       - "5432:5432"
     healthcheck:
-      test: ["CMD", "pg_isready"]
-      interval: 1m30s
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 1s
       timeout: 30s
       retries: 5
       start_period: 30s
