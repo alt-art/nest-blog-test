@@ -3,29 +3,30 @@ import {
   Controller,
   Delete,
   Get,
-  Param,
-  ParseIntPipe,
   Post,
+  Request,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { CreateUserDTO } from './user.dto';
 import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly appService: UserService) {}
-
-  @Get(':id')
-  getUser(@Param('id', ParseIntPipe) id: number) {
-    return this.appService.getUser(id);
+  @UseGuards(AuthGuard('jwt'))
+  @Get()
+  getUser(@Request() req: any) {
+    return this.appService.getUser(req.user.id);
   }
 
   @Post()
   createUser(@Body() createUserDTO: CreateUserDTO) {
     return this.appService.createUser(createUserDTO);
   }
-
-  @Delete(':id')
-  deleteUser(@Param('id', ParseIntPipe) id: number) {
-    return this.appService.deleteUser(id);
+  @UseGuards(AuthGuard('jwt'))
+  @Delete()
+  deleteUser(@Request() req: any) {
+    return this.appService.deleteUser(req.user.id);
   }
 }
