@@ -3,7 +3,6 @@ import {
   Controller,
   Get,
   Param,
-  ParseIntPipe,
   Request,
   Post,
   UseGuards,
@@ -27,7 +26,7 @@ export class PostController {
   }
 
   @Get('/:id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id') id: number) {
     return this.postService.findOne(id);
   }
 
@@ -41,7 +40,7 @@ export class PostController {
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Roles(Role.ADMIN)
   @Post('/:id')
-  delete(@Param('id', ParseIntPipe) id: number) {
+  delete(@Param('id') id: number) {
     this.postService.delete(id);
   }
 }

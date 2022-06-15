@@ -11,7 +11,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(email, password) {
+  async validateUser(email: string, password: string) {
     const user = await this.prismaService.user.findUnique({
       where: { email },
     });
