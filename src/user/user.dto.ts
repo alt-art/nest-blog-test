@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
-import { IsValidPassword } from 'src/utils/validPassword';
+import { IsValidPassword } from '../utils/validPassword';
 
 export class CreateUserDTO {
   @IsString()

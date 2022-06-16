@@ -9,12 +9,11 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Role } from '@prisma/client';
-import { Roles } from 'src/auth/roles.decorator';
+import { Roles } from '../auth/roles.decorator';
 import { CreatePostDTO } from './post.dto';
 import { PostService } from './post.service';
-
-import { RolesGuard } from 'src/auth/roles.guard';
-import { RequestWithUser } from 'src/user/user.controller';
+import { RolesGuard } from '../auth/roles.guard';
+import { RequestWithUser } from '../user/user.controller';
 
 @Controller('post')
 export class PostController {
